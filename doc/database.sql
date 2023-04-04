@@ -25,6 +25,7 @@ CREATE TABLE `article` (
   PRIMARY KEY (`id`)
 );
 
+
 -- DROP TABLE article;
 ===================================================================================
 
@@ -43,6 +44,12 @@ values ('Holzschraube 4 x 45 Torx', 'Eine total coole Holzschraube', 'OBI', 0.32
 
 insert into article (name, description, trader, price, created_at) 
 values ('Leiste Buche 1000x42x37', 'Holzleiste Buche 1000/42/37 mm (L/B/H)', 'Hornbach', 2.32, NOW());
+
+insert into article (name, description, trader, price, created_at) 
+values ('Rundholz Eiche 2500x45', 'Geländerstab Eiche 50 mm rund 2500 mm lang', 'Hornbach', 29.99, NOW());
+
+insert into article (name, description, trader, price, created_at) 
+values ('Winkel 30x30x50', 'Metallwinkel verzinkt 30/30/50 mm (L/B/H)', 'Bauhaus', 0.56, NOW());
 
 ===================================================================================
 

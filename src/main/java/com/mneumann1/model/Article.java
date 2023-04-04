@@ -16,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -51,7 +52,7 @@ public class Article {
 	private String trader; 
 	
 	
-	@NotBlank(message="Es muss ein Preis eingegeben werden!")
+	@NotNull(message="Es muss ein Preis eingegeben werden!")
 	private BigDecimal price;
 	
 	
