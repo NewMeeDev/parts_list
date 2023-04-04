@@ -6,12 +6,15 @@ package com.mneumann1.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mneumann1.model.Article;
@@ -32,33 +35,33 @@ public class ArticleController {
 	
 	
 	@GetMapping("/articles")
-	public List<Article> getAllArticles() {
-		return service.getAllArticles();
+	public ResponseEntity<List<Article>> getAllArticles() {
+		return new ResponseEntity<List<Article>>(service.getAllArticles(), HttpStatus.OK);
 	}
 	
 	
 	@GetMapping("/articles/{id}")
-	public Article getArticleById(@PathVariable("id") Long id) {
-		return service.getArticleById(id);
-		//return new ResponseEntity<Article>(service.getArticleById(id), HttpStatus.OK);
+	public ResponseEntity<Article> getArticleById(@PathVariable("id") Long id) {
+		return new ResponseEntity<Article>(service.getArticleById(id), HttpStatus.OK);
 	}
 	
 	
 	@PostMapping("/articles")
-	public Article createArticle(@Valid @RequestBody Article newArticle) {
-		return service.createArticle(newArticle);
+	public ResponseEntity<Article> createArticle(@Valid @RequestBody Article newArticle) {
+		return new ResponseEntity<Article>(service.createArticle(newArticle), HttpStatus.CREATED);
 	}
 	
 	
 	@PutMapping("/articles/{id}")
-	public Article updateArticle(@PathVariable("id") Long id, @Valid @RequestBody Article articleToUpdate) {
+	public ResponseEntity<Article> updateArticle(@PathVariable("id") Long id, @Valid @RequestBody Article articleToUpdate) {
 		articleToUpdate.setId(id);
-		return service.updateArticle(articleToUpdate);
+		return new ResponseEntity<Article>(service.updateArticle(articleToUpdate), HttpStatus.OK);
 	}
 	
 	
 	@DeleteMapping("/articles/{id}")
-	public void deleteArticle(@PathVariable("id") Long id) {
+	public ResponseEntity<HttpStatus> deleteArticle(@PathVariable("id") Long id) {
 		service.deleteArticle(id);
+		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
 	}
 }
