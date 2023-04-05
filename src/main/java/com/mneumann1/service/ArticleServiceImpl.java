@@ -39,9 +39,8 @@ public class ArticleServiceImpl implements ArticleService {
 		if (article.isPresent()) {
 			return article.get();
 		} else {
-			throw new RuntimeException("Der Artikel mit der ID: " + id + " wurde nicht gefunden!");
-		}
-		
+			return null;
+		}		
 	}
 
 	
