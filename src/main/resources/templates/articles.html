@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout}" xmlns:th="http://www.thymeleaf.org">
+
+<!--  
+1. Insert title
+2. Insert table for orders
+3. Add to defaultLayout
+-->
+
+  <div layout:fragment="content" class="container mt-3 mb-3">
+	<h2 th:text="${title}"></h2>
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th scope="col">Id</th>
+	      <th scope="col">Name</th>
+	      <th scope="col">Beschreibung</th>
+	      <th scope="col" style="text-align:right; padding-right:30px">Preis</th>
+	      <th scope="col">Erstellt</th>
+	      <th scope="col">Aktualisiert</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr th:each="article : ${articles}">
+	      <td th:text="${article.id}"></td>
+	      <td th:text="${article.name}"></td>
+	      <td th:text="${article.description}"></td>
+	      <td th:text="${#numbers.formatDecimal(article.price, 1, 2, 'COMMA') + ' €'}" style="text-align:right; padding-right:30px"></td>
+	      <td th:text="${#dates.format(article.createdAt, 'dd.MM.yyyy HH:mm')}"></td>
+	      <td th:text="${#dates.format(article.updatedAt, 'dd.MM.yyyy HH:mm')}"></td>
+	    </tr>
+	  </tbody>
+	</table>
+  </div>
+  
+</html>

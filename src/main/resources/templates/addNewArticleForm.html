@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Order-Management-App</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container mt-3 mb-3">
+			<form th:action="@{/articles/addNew}" action="#" method="post" th:object="${article}">
+			
+			  <div class="mb-3">
+			    <label for="articleNameInput" class="form-label">Artikelname</label>
+			    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red; padding-left:40px;"></span>
+			    <input th:field="*{name}" type="text" class="form-control" id="articleNameInput" aria-describedby="articleNameHelp">
+			    <div id="articleNameHelp" class="form-text">Geben Sie einen Artikelnamen ein.</div>
+			  </div>
+			  
+			  <div class="mb-3">
+			    <label for="articleDescriptionInput" class="form-label">Beschreibung</label>
+			    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" style="color:red; padding-left:40px;"></span>
+			    <input th:field="*{description}" type="text" class="form-control" id="articleDescriptionInput" aria-describedby="articleDescriptionHelp">
+			    <div id="articleDescriptionHelp" class="form-text">Geben Sie eine kurze Artikelbeschreibung ein.</div>
+			  </div>
+			  
+			  <div class="mb-3">
+			    <label for="articleTraderInput" class="form-label">Händler</label>
+			    <span th:if="${#fields.hasErrors('trader')}" th:errors="*{trader}" style="color:red; padding-left:40px;"></span>
+			    <input th:field="*{trader}" type="text" class="form-control" id="articleTraderInput" aria-describedby="articleTraderHelp">
+			    <div id="articleTraderHelp" class="form-text">Geben Sie den Händlernamen ein.</div>
+			  </div>
+			  
+			  <div class="mb-3">
+			    <label for="articlePriceInput" class="form-label">Preis (€)</label>
+			    <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" style="color:red; padding-left:40px;"></span>
+			    <input th:field="*{price}" type="text" class="form-control" id="articlePriceInput" aria-describedby="articlePriceHelp">
+			    <div id="articlePriceHelp" class="form-text">Geben Sie den Einzelpreis des Artikels in Euro ein!</div>
+			  </div>
+
+			  <button type="submit" class="btn btn-primary">Speichern</button>
+			  
+			  
+			</form>
+		</div>
+	</div>
+</body>
+</html>

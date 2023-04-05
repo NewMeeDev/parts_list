@@ -3,65 +3,82 @@
  */
 package com.mneumann1.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.mneumann1.model.Article;
 import com.mneumann1.service.ArticleService;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
-
 
 /**
  * @author MNEUMANN1
  *
  */
-@RestController
+@Controller
+@RequestMapping("/articles")
 public class ArticleController {
 	
 	@Autowired
 	ArticleService service;
+
 	
-	
-	@GetMapping("/articles")
-	public ResponseEntity<List<Article>> getAllArticles() {
-		return new ResponseEntity<List<Article>>(service.getAllArticles(), HttpStatus.OK);
+	@GetMapping("/")
+	public String showAllArticles(Model model) {
+		List<Article> articles = service.getAllArticles();
+		model.addAttribute("articles", articles);
+		model.addAttribute("title", "Alle verfügbaren Artikel:");
+		return "articles.html";
 	}
 	
 	
-	@GetMapping("/articles/{id}")
-	public ResponseEntity<Article> getArticleById(@PathVariable("id") Long id) {
-		return new ResponseEntity<Article>(service.getArticleById(id), HttpStatus.OK);
+	@GetMapping("/showNewArticleForm")
+	public String showNewForm(Model model) {
+		model.addAttribute("article", new Article());
+		return "addNewArticleForm.html";
 	}
 	
 	
-	@PostMapping("/articles")
-	public ResponseEntity<Article> createArticle(@Valid @RequestBody Article newArticle) {
-		return new ResponseEntity<Article>(service.createArticle(newArticle), HttpStatus.CREATED);
+	@PostMapping("/addNew")
+	public String addNew(@Valid Article newArticle, BindingResult bindingResult, Model model) {
+		
+		// if validation fails
+		if (bindingResult.hasErrors()) {
+		
+			return "addNewArticleForm.html";
+			
+		} else {
+			
+			newArticle.setId(null);
+			
+			// add to the database
+			service.createArticle(newArticle);
+			
+			// get all orders from database
+			List<Article> articles = service.getAllArticles();
+			
+			// show all orders page
+			model.addAttribute("articles", articles);
+					
+			return "articles.html";
+		}
 	}
 	
 	
-	@PutMapping("/articles/{id}")
-	public ResponseEntity<Article> updateArticle(@PathVariable("id") Long id, @Valid @RequestBody Article articleToUpdate) {
-		articleToUpdate.setId(id);
-		return new ResponseEntity<Article>(service.updateArticle(articleToUpdate), HttpStatus.OK);
-	}
-	
-	
-	@DeleteMapping("/articles/{id}")
-	public ResponseEntity<HttpStatus> deleteArticle(@PathVariable("id") Long id) {
-		service.deleteArticle(id);
-		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
-	}
 }

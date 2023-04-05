@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Order-Managemant-App</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  
+  <body>
+  	<!-- header -->
+  	<div th:replace="~{layouts/header :: header}">My header will go here.</div>
+  
+  	<!-- content -->
+  	<section layout:fragment="content">
+  		<p>Replace this with a page that has layout:fragment="content"</p>
+  	</section>
+  
+    <!-- footer -->
+    <div th:replace="~{layouts/footer :: footer}">My footer will go here.</div>
+    <script src="/js/bootstrap.bundle.js"></script>
+  </body>
+ </html>

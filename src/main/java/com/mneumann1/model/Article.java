@@ -8,6 +8,7 @@ import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.NumberFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,6 +16,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -44,7 +48,7 @@ public class Article {
 	@NotBlank(message="Es muss eine Artikelbezeichung eingegeben werden!")
 	private String name;
 	
-
+	@NotBlank(message="Bitte geben Sie einen kurzen Beschreibungstext ein!")
 	private String description;
 
 	
@@ -53,6 +57,8 @@ public class Article {
 	
 	
 	@NotNull(message="Es muss ein Preis eingegeben werden!")
+	@DecimalMin(value = "0.01", inclusive = true, message="Der Preis muss mindestens 1 Cent betragen!")
+	@DecimalMax(value = "9999.99", inclusive = true, message="Der Preis darf maximal 9999,99 EURO betragen!")
 	private BigDecimal price;
 	
 	
