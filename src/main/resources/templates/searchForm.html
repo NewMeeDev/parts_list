@@ -1,26 +1,36 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layouts/defaultLayout}" xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{layouts/layout}" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-<meta charset="UTF-8">
-<title>Order-Management-App</title>
-</head>
-<body>
-	<div layout:fragment="content">
+
+<div layout:fragment="content">
+
+	<div class="container mt-3 mb-3">
+		<form th:action="@{/articles/search}" action="#" method="post" th:object="${searchModel}">
+		
+		  	<div class="mb-3">
+		    	<label for="searchTermForArticleNameInput" class="form-label">Suche im Artikelnamen:</label>
+		    	<input th:field="*{searchTermForArticleName}" type="text" class="form-control" id="searchTermForArticleNameInput" placeholder="Bitte eine Zeichenkette für die Suche im Artikelnamen eingeben.">
+		  	</div>
+		  	
+		  	<div class="mb-3">
+		    	<label for="searchTermForArticleDescriptionInput" class="form-label">Suche in der Artikelbeschreibung:</label>
+		    	<input th:field="*{searchTermForArticleDescription}" type="text" class="form-control" id="searchTermForArticleDescriptionInput" placeholder="Bitte eine Zeichenkette für die Suche in der Artikelbeschreibung eingeben.">
+		  	</div>
+		  			  	
+		  	<div class="mb-3">
+		  		<label for="priceRangeInput" class="form-label">Preisfilter:</label>
+			  	<div class="input-group" id="priceRangeInput" style="width:40%;">
+			  		
+	            	<input th:field="*{searchPriceRangeFrom}" class="form-control" id="searchPriceRangeFromInput" placeholder="min."  name="firstname" type="text" />
+	            	
+	            	<input th:field="*{searchPriceRangeTo}" class="form-control" id="searchPriceRangeToInput" placeholder="max."  name="lastname" type="text" />
+	        	</div>
+	        	<p th:if="${#fields.hasErrors('searchPriceRangeFrom')}" th:errors="*{searchPriceRangeFrom}" style="color:red;"></p>	
+	        	<p th:if="${#fields.hasErrors('searchPriceRangeTo')}" th:errors="*{searchPriceRangeTo}" style="color:red;"></p>
+		  	</div>
 	
-		<div class="container mt-3 mb-3">
-			<form th:action="@{/orders/search}" action="#" method="post" th:object="${searchModel}">
-			
-			  <div class="mb-3">
-			    <label for="searchTermInput" class="form-label">Order Number</label>
-			    <input th:field="*{searchTerm}" type="text" class="form-control" id="searchTermInput" aria-describedby="searchHelp">
-			    <div id="searchHelp" class="form-text">Give me a phrase or word to search for.</div>
-			  </div>
-		
-			<button type="submit" class="btn btn-primary">Submit</button>
-			</form>
-		</div>
-		
+			<button type="submit" class="btn btn-primary">Suche</button>
+		</form>
 	</div>
-</body>
+</div>
 </html>

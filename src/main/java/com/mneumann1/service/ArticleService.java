@@ -3,6 +3,7 @@
  */
 package com.mneumann1.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.mneumann1.model.Article;
@@ -22,4 +23,7 @@ public interface ArticleService {
 	Article updateArticle(Article article);
 	
 	void deleteArticle(Long id);
+	
+	List<Article> searchArticles(String searchTermForArticleName, 
+			String searchTermForArticleDescription, BigDecimal searchPriceRangeFrom, BigDecimal searchPriceRangeTo);
 }

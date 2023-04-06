@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "46d7eda9-5d14-454e-995f-8fc9463df265",
 		"name": "parts_list",
+		"description": "http://localhost:8080\r\n---------------------\r\nURL-WebApp:\t\t/articles\r\nURL-API-JSON:\t/api/v1/articles\r\nURL-API-XML:\t/api/v1/xml/articles",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -28,13 +29,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/articles/1",
+					"raw": "{{url}}/articles/25",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"articles",
-						"1"
+						"25"
 					]
 				}
 			},
@@ -47,7 +48,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Holzschraube 5 x 70 Kreuzschlitz\",\r\n    \"description\": \"No ne andere Holzschraube\",\r\n    \"trader\": \"\",\r\n    \"price\": 0.37\r\n}",
+					"raw": "{\r\n    \"name\": \"Brett\",\r\n    \"description\": \"Ein Brett aus Weichholz!\",\r\n    \"trader\": \"OBI\",\r\n    \"price\": 100.48,\r\n    \"createdAt\": \"2023-04-05T13:56:34.000+00:00\",\r\n    \"updatedAt\": \"2023-04-05T13:56:34.000+00:00\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -73,7 +74,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"name\": \"Holzschraube 5 x 70 Kreuzschlitz\",\r\n        \"description\": \"No ne andere Holzschraube\",\r\n        \"trader\": \"OBI\",\r\n        \"price\": 0.77\r\n    }",
+					"raw": "{\r\n    \"name\": \"Brett\",\r\n    \"description\": \"Ein Brett aus Hartholz!\",\r\n    \"trader\": \"OBI\",\r\n    \"price\": 100.48,\r\n    \"createdAt\": \"2023-04-05T13:56:34.000+00:00\",\r\n    \"updatedAt\": \"2023-04-05T13:56:34.000+00:00\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -81,13 +82,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/articles/6",
+					"raw": "{{url}}/articles/25",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"articles",
-						"6"
+						"25"
 					]
 				}
 			},
@@ -99,17 +100,43 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/articles/6",
+					"raw": "{{url}}/articles/26",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"articles",
-						"6"
+						"26"
 					]
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": ""
 		}
 	]
 }

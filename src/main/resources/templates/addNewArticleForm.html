@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layouts/layout}" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-<meta charset="UTF-8">
-<title>Order-Management-App</title>
-</head>
-<body>
+
 	<div layout:fragment="content">
 		<div class="container mt-3 mb-3">
 			<form th:action="@{/articles/addNew}" action="#" method="post" th:object="${article}">
@@ -44,5 +40,5 @@
 			</form>
 		</div>
 	</div>
-</body>
+
 </html>

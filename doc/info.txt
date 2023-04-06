@@ -1,0 +1,5 @@
+http://localhost:8080
+---------------------
+URL-WebApp:		/articles
+URL-API-JSON:	/api/v1/articles
+URL-API-XML:	/api/v1/xml/articles

@@ -3,6 +3,8 @@
  */
 package com.mneumann1.service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,5 +62,29 @@ public class ArticleServiceImpl implements ArticleService {
 	public void deleteArticle(Long id) {
 		artRepo.deleteById(id);
 	}
-
+	
+	@Override
+	public List<Article> searchArticles(String searchTermForArticleName, 
+			String searchTermForArticleDescription, BigDecimal searchPriceRangeFrom, BigDecimal searchPriceRangeTo) {
+		
+		List<Article> articles = artRepo.findAll();
+		List<Article> matches = new ArrayList<>();
+				
+		for (Article article : articles) {
+			if(article.getName().toLowerCase().contains(searchTermForArticleName.toLowerCase())) {
+				if(article.getDescription().toLowerCase().contains(searchTermForArticleDescription.toLowerCase())) {
+					if(searchPriceRangeTo.compareTo(BigDecimal.ZERO) == 0  && searchPriceRangeTo.compareTo(BigDecimal.ZERO) == 0) {
+						searchPriceRangeFrom = new BigDecimal(0);
+						searchPriceRangeTo = new BigDecimal(9999.99);
+					}
+					
+					if (article.getPrice().compareTo(searchPriceRangeTo) <= 0 && article.getPrice().compareTo(searchPriceRangeFrom) >= 0) {
+						matches.add(article);
+					}
+							
+				}
+			}		
+		}
+		return matches;
+	}
 }
