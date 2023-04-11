@@ -25,5 +25,5 @@ public interface ArticleService {
 	void deleteArticle(Long id);
 	
 	List<Article> searchArticles(String searchTermForArticleName, 
-			String searchTermForArticleDescription, BigDecimal searchPriceRangeFrom, BigDecimal searchPriceRangeTo);
+			String searchTermForArticleDescription, String searchTermForArticleTrader, BigDecimal searchPriceRangeFrom, BigDecimal searchPriceRangeTo);
 }

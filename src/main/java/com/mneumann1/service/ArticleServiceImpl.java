@@ -65,7 +65,7 @@ public class ArticleServiceImpl implements ArticleService {
 	
 	@Override
 	public List<Article> searchArticles(String searchTermForArticleName, 
-			String searchTermForArticleDescription, BigDecimal searchPriceRangeFrom, BigDecimal searchPriceRangeTo) {
+			String searchTermForArticleDescription, String searchTermForArticleTrader, BigDecimal searchPriceRangeFrom, BigDecimal searchPriceRangeTo) {
 		
 		List<Article> articles = artRepo.findAll();
 		List<Article> matches = new ArrayList<>();
@@ -73,13 +73,15 @@ public class ArticleServiceImpl implements ArticleService {
 		for (Article article : articles) {
 			if(article.getName().toLowerCase().contains(searchTermForArticleName.toLowerCase())) {
 				if(article.getDescription().toLowerCase().contains(searchTermForArticleDescription.toLowerCase())) {
-					if(searchPriceRangeTo.compareTo(BigDecimal.ZERO) == 0  && searchPriceRangeTo.compareTo(BigDecimal.ZERO) == 0) {
-						searchPriceRangeFrom = new BigDecimal(0);
-						searchPriceRangeTo = new BigDecimal(9999.99);
-					}
-					
-					if (article.getPrice().compareTo(searchPriceRangeTo) <= 0 && article.getPrice().compareTo(searchPriceRangeFrom) >= 0) {
-						matches.add(article);
+					if(article.getTrader().toLowerCase().contains(searchTermForArticleTrader.toLowerCase())) {
+						if(searchPriceRangeTo.compareTo(BigDecimal.ZERO) == 0  && searchPriceRangeTo.compareTo(BigDecimal.ZERO) == 0) {
+							searchPriceRangeFrom = new BigDecimal(0);
+							searchPriceRangeTo = new BigDecimal(9999.99);
+						}
+						
+						if (article.getPrice().compareTo(searchPriceRangeTo) <= 0 && article.getPrice().compareTo(searchPriceRangeFrom) >= 0) {
+							matches.add(article);
+						}
 					}
 							
 				}

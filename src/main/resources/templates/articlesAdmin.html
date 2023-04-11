@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout}" xmlns:th="http://www.thymeleaf.org">
+
+
+	<div layout:fragment="content" class="container mt-3 mb-3">
+		
+		<table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th scope="col">Id</th>
+		      <th scope="col">Name</th>
+		      <th scope="col">Beschreibung</th>
+		      <th scope="col">Händler</th>
+		      <th scope="col" style="text-align:right; padding-right:30px">Preis</th>
+		      <th scope="col">Erstellt</th>
+		      <th scope="col">Aktualisiert</th>
+		      <th scope="col">Löschen</th>
+		      <th scope="col">Bearbeiten</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="article : ${articles}">
+		      <td th:text=" ${article.id}"></td>
+		      <td th:text=" ${article.name}"></td>
+		      <td th:text=" ${article.description}"></td>
+		      <td th:text=" ${article.trader}"></td>
+		      <td th:text="${#numbers.formatDecimal(article.price, 1, 2, 'COMMA') + ' €'}" style="text-align:right; padding-right:30px"></td>
+	      	  <td th:text="${#dates.format(article.createdAt, 'dd.MM.yyyy HH:mm')}"></td>
+	      	  <td th:text="${#dates.format(article.updatedAt, 'dd.MM.yyyy HH:mm')}"></td>
+		      <td>
+		      	<form action="#" th:action="@{/articles/delete}" th:object="${article}" method="post">
+		      		<input name="id" type="hidden" th:value="${article.id}">
+		      		<input name="name" type="hidden" th:value="${article.name}">
+		      		<input name="description" type="hidden" th:value="${article.description}">
+		      		<input name="trader" type="hidden" th:value="${article.trader}">
+		      		<input name="price" type="hidden" th:value="${article.price}">
+		      		<input name="createdAt" type="hidden" th:value="${article.createdAt}">
+		      		<input name="updatedAt" type="hidden" th:value="${article.updatedAt}">
+		      		<button class="btn btn-danger" type="submit" name="deleteItem">Löschen</button>
+		      	</form>
+		      </td>
+		      <td>
+		      	<form action="#" th:action="@{/articles/edit}" th:object="${article}" method="post">
+		      		<input name="id" type="hidden" th:value="${article.id}">
+		      		<input name="name" type="hidden" th:value="${article.name}">
+		      		<input name="description" type="hidden" th:value="${article.description}">
+		      		<input name="trader" type="hidden" th:value="${article.trader}">
+		      		<input name="price" type="hidden" th:value="${article.price}">
+		      		<input name="createdAt" type="hidden" th:value="${article.createdAt}">
+		      		<input name="updatedAt" type="hidden" th:value="${article.updatedAt}">
+		      		<button class="btn btn-warning" type="submit" name="editItem">Bearbeiten</button>
+		      	</form>
+		      </td>
+
+		    </tr>
+		  </tbody>
+		</table>
+		
+  </div>
+
+</html>
