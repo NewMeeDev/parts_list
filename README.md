@@ -6,3 +6,5 @@ A simple CRUD-App, which demonstrates the basics of a Spring-Boot REST-Api and a
 Standard-Setting is a MySql-Database but you can use other DBMS by simply changes in the JPA-Configs. 
 
 The general Database Table-Structure for this App, is described in the file "database.sql" in the doc-folder. 
+
+Some other infos about the Standard-URLs, where you can reach the different services, is described in doc/info.txt.
